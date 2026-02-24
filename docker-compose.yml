@@ -1,0 +1,136 @@
+version: '3.8'
+
+services:
+  db-catalogue:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_CATALOGUE}
+      POSTGRES_DB: ${POSTGRES_DB_CATALOGUE}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./service_catalogue/src/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - shop_net
+
+  service_catalogue:
+    build:
+      context: ./service_catalogue
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_CATALOGUE}
+      POSTGRES_DB: ${POSTGRES_DB_CATALOGUE}
+      POSTGRES_HOST: db-catalogue
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db-catalogue
+    networks:
+      - shop_net
+
+  api_gateway:
+    build:
+      context: ./api_gateway
+      dockerfile: Dockerfile
+    environment:
+      CATALOGUE_URL: http://service_catalogue:3001
+    ports:
+      - "8080:8080"
+    depends_on:
+      - service_catalogue
+    networks:
+      - shop_net
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8081:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: db-catalogue
+    depends_on:
+      - db-catalogue
+    networks:
+      - shop_net
+
+  db-utilisateur:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_USER}
+      POSTGRES_DB: ${POSTGRES_DB_USER}
+    ports:
+      - "5433:5432"
+    volumes:
+      - db-utilisateur-data:/var/lib/postgresql/data
+      - ./service_utilisateur/src/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - shop_net
+
+  service_utilisateur:
+    build:
+      context: ./service_utilisateur
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_USER}
+      POSTGRES_DB: ${POSTGRES_DB_USER}
+      POSTGRES_HOST: db-utilisateur
+    ports:
+      - "3002:3002"
+    depends_on:
+      - db-utilisateur
+    networks:
+      - shop_net
+
+  db-messagerie:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_MESS}
+      POSTGRES_DB: ${POSTGRES_DB_MESS}
+    ports:
+      - "5434:5432"
+    volumes:
+      - db-messagerie-data:/var/lib/postgresql/data
+      - ./service_messagerie/src/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - shop_net
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - shop_net
+
+  service_messagerie:
+    build:
+      context: ./service_messagerie
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_MESS}
+      POSTGRES_DB: ${POSTGRES_DB_MESS}
+      POSTGRES_HOST: db-messagerie
+      RABBITMQ_URL: amqp://rabbitmq:5672
+    ports:
+      - "3003:3003"
+    depends_on:
+      - db-messagerie
+      - rabbitmq
+    networks:
+      - shop_net
+
+networks:
+  shop_net:
+
+
+volumes:
+  db-data:
+  db-utilisateur-data:
+  db-messagerie-data:
