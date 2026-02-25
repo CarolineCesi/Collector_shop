@@ -48,15 +48,6 @@ app.use('/api/users', createProxyMiddleware({
     },
 }));
 
-// Proxy vers service_messagerie
-app.use('/api/messages', createProxyMiddleware({
-    target: process.env.MESSAGERIE_URL || 'http://service_messagerie:3003',
-    changeOrigin: true,
-    pathRewrite: {
-        '^/api/messages': '',
-    },
-}));
-
 app.listen(PORT, () => {
     console.log(`API Gateway en écoute sur le port ${PORT}`);
 });

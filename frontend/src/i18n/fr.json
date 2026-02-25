@@ -1,0 +1,103 @@
+{
+    "categories": {
+        "sneakers": "Baskets",
+        "toys": "Jouets & Figurines",
+        "posters": "Affiches",
+        "retroTech": "Tech Rétro",
+        "tradingCards": "Cartes à collectionner",
+        "comics": "Bandes dessinées",
+        "watches": "Montres",
+        "collectorItems": "Objets de collection"
+    },
+    "header": {
+        "search": "Rechercher des objets rares, vintage tech...",
+        "searchMobile": "Rechercher des objets rares..."
+    },
+    "home": {
+        "exclusiveDrop": "Exclusivité",
+        "viewDropDetails": "Voir les détails",
+        "trendingNow": "Tendances",
+        "viewAll": "Tout voir"
+    },
+    "product": {
+        "back": "Retour",
+        "buyNow": "Acheter maintenant (Paiement sécurisé)",
+        "placeBid": "Faire une offre",
+        "buyerProtection": "Protection acheteur",
+        "buyerProtectionDesc": "Recevez l'article commandé ou récupérez votre argent. Nous conservons les fonds jusqu'à confirmation de réception.",
+        "secureTransaction": "Transaction sécurisée via Stripe",
+        "secureTransactionDesc": "Vos informations de paiement sont cryptées et traitées de manière sécurisée par Stripe.",
+        "aboutSeller": "À propos du vendeur",
+        "follow": "Suivre",
+        "reviews": "avis",
+        "itemDescription": "Description & historique de l'objet"
+    },
+    "favorites": {
+        "title": "Mes Favoris",
+        "itemsSaved": "objets enregistrés",
+        "emptyTitle": "Votre liste de favoris est vide",
+        "emptyDesc": "Commencez à explorer pour trouver des trésors rares.",
+        "explore": "Explorer le marché"
+    },
+    "profile": {
+        "editProfile": "Modifier le profil",
+        "itemsSold": "Objets vendus",
+        "activeListings": "Annonces actives",
+        "followers": "Abonnés",
+        "myListings": "Mes annonces",
+        "reviews": "Avis",
+        "addItem": "Ajouter un objet",
+        "active": "Actif",
+        "sold": "Vendu",
+        "views": "vues",
+        "likes": "likes",
+        "loading": "Chargement du profil...",
+        "error": "Erreur de chargement du profil."
+    },
+    "addItem": {
+        "title": "Ajouter un objet",
+        "titleField": "Titre",
+        "category": "Catégorie",
+        "condition": "État",
+        "price": "Prix (€)",
+        "description": "Description",
+        "descPlaceholder": "Décrivez votre objet en détail...",
+        "imageUrl": "URL de l'image",
+        "cancel": "Annuler",
+        "submit": "Ajouter au catalogue",
+        "titleRequired": "Le titre est requis.",
+        "priceRequired": "Le prix est requis.",
+        "priceInvalid": "Le prix doit être un nombre valide.",
+        "pricePositive": "Le prix doit être supérieur à 0."
+    },
+    "messages": {
+        "title": "Messages",
+        "searchInbox": "Rechercher dans la boîte...",
+        "all": "Tous",
+        "buying": "Achats",
+        "selling": "Ventes",
+        "online": "En ligne",
+        "makeOffer": "Faire une offre",
+        "offerReceived": "Offre reçue",
+        "accept": "Accepter",
+        "decline": "Refuser",
+        "typePlaceholder": "Écrire un message...",
+        "back": "Retour"
+    },
+    "auth": {
+        "welcome": "Bienvenue sur Collector.shop",
+        "loginDesc": "Connectez-vous pour accéder à votre compte",
+        "loginButton": "Se connecter avec Keycloak",
+        "noAccount": "Pas encore de compte ?",
+        "createAccount": "Créer un compte",
+        "joinTitle": "Rejoindre Collector.shop",
+        "joinDesc": "Créez votre compte et commencez à collectionner",
+        "registerButton": "Créer un compte via Keycloak",
+        "haveAccount": "Déjà un compte ?",
+        "signIn": "Se connecter"
+    },
+    "common": {
+        "signIn": "Connexion",
+        "signUp": "Inscription"
+    }
+}

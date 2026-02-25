@@ -34,7 +34,7 @@ VALUES (
     'u1', 
     'Alex Collector', 
     'alex@example.com',
-    'password123',
+    '$2b$10$placeholder_hashed_password_seed_data',
     '@alex_vintage', 
     'https://images.unsplash.com/photo-1704726135027-9c6f034cfa41?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1c2VyJTIwYXZhdGFyJTIwcG9ydHJhaXR8ZW58MXx8fHwxNzcxODUyMjg4fDA&ixlib=rb-4.1.0&q=80&w=1080', 
     'https://images.unsplash.com/photo-1598452628649-d272a47d9047?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHxjb29sJTIwdmludGFnZSUyMGNvbGxlY3RvciUyMGl0ZW18ZW58MXx8fHwxNzcxODcxNDY0fDA&ixlib=rb-4.1.0&q=80&w=1080',

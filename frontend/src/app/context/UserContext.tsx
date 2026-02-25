@@ -1,5 +1,6 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { fetchUser, loginUser, registerUser } from '../../api';
+import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
+import Keycloak from 'keycloak-js';
+import { syncUserAfterLogin, fetchUser, setAuthToken } from '../../api';
 
 interface User {
     id: string;
@@ -24,67 +25,105 @@ interface UserContextType {
     user: User | null;
     userId: string | null;
     loading: boolean;
-    loginAccount: (credentials: any) => Promise<void>;
-    registerAccount: (userData: any) => Promise<void>;
+    keycloak: Keycloak | null;
+    loginAccount: () => void;
+    registerAccount: () => void;
     logout: () => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
+// Keycloak instance
+const keycloakInstance = new Keycloak({
+    url: import.meta.env.VITE_KEYCLOAK_URL || 'http://localhost:8082',
+    realm: 'collector-shop',
+    clientId: 'collector-frontend',
+});
+
 export function UserProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
-    const [userId, setUserId] = useState<string | null>(null); // Start logged out
+    const [userId, setUserId] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
+    const [keycloak, setKeycloak] = useState<Keycloak | null>(null);
 
-    // Initial check to see if user was stored in local storage
+    // Initialize Keycloak
     useEffect(() => {
-        const storedUserId = localStorage.getItem('collector_user_id');
-        if (storedUserId) {
-            setUserId(storedUserId);
-        } else {
+        keycloakInstance.init({
+            onLoad: 'check-sso',
+            silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
+            checkLoginIframe: false,
+        }).then(async (authenticated) => {
+            setKeycloak(keycloakInstance);
+
+            if (authenticated && keycloakInstance.token) {
+                setAuthToken(keycloakInstance.token);
+                const keycloakId = keycloakInstance.subject || '';
+                const tokenParsed = keycloakInstance.tokenParsed;
+                const name = tokenParsed?.preferred_username || tokenParsed?.name || 'User';
+                const email = tokenParsed?.email || '';
+
+                try {
+                    // Sync user with our backend
+                    const userData = await syncUserAfterLogin(keycloakId, name, email);
+                    setUser(userData);
+                    setUserId(keycloakId);
+                } catch (err) {
+                    console.error('Failed to sync user after Keycloak login:', err);
+                    // Try fetching user directly
+                    try {
+                        const userData = await fetchUser(keycloakId);
+                        setUser(userData);
+                        setUserId(keycloakId);
+                    } catch {
+                        console.error('User not found in backend');
+                    }
+                }
+            }
             setLoading(false);
-        }
+        }).catch((err) => {
+            console.error('Keycloak init failed:', err);
+            setLoading(false);
+        });
+
+        // Token refresh
+        const refreshInterval = setInterval(() => {
+            if (keycloakInstance.authenticated) {
+                keycloakInstance.updateToken(30).then((refreshed) => {
+                    if (refreshed && keycloakInstance.token) {
+                        setAuthToken(keycloakInstance.token);
+                    }
+                }).catch(() => {
+                    console.error('Token refresh failed');
+                });
+            }
+        }, 60000); // Refresh every 60s
+
+        return () => clearInterval(refreshInterval);
     }, []);
 
-    useEffect(() => {
-        if (userId) {
-            setLoading(true);
-            fetchUser(userId)
-                .then(setUser)
-                .catch((e) => {
-                    console.error(e);
-                    logout(); // If the user fails to load, log them out
-                })
-                .finally(() => setLoading(false));
-        } else {
-            setUser(null);
-            setLoading(false);
-            localStorage.removeItem('collector_user_id');
-        }
-    }, [userId]);
+    const loginAccount = useCallback(() => {
+        keycloakInstance.login({
+            redirectUri: window.location.origin + '/profile',
+        });
+    }, []);
 
-    const loginAccount = async (credentials: any) => {
-        const data = await loginUser(credentials);
-        setUserId(data.id);
-        setUser(data);
-        localStorage.setItem('collector_user_id', data.id);
-    };
+    const registerAccount = useCallback(() => {
+        keycloakInstance.register({
+            redirectUri: window.location.origin + '/profile',
+        });
+    }, []);
 
-    const registerAccount = async (userData: any) => {
-        const data = await registerUser(userData);
-        setUserId(data.id);
-        setUser(data);
-        localStorage.setItem('collector_user_id', data.id);
-    };
-
-    const logout = () => {
-        setUserId(null);
+    const logout = useCallback(() => {
         setUser(null);
-        localStorage.removeItem('collector_user_id');
-    };
+        setUserId(null);
+        setAuthToken(null);
+        keycloakInstance.logout({
+            redirectUri: window.location.origin,
+        });
+    }, []);
 
     return (
-        <UserContext.Provider value={{ user, userId, loading, loginAccount, registerAccount, logout }}>
+        <UserContext.Provider value={{ user, userId, loading, keycloak, loginAccount, registerAccount, logout }}>
             {children}
         </UserContext.Provider>
     );

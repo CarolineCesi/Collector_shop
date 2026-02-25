@@ -1,0 +1,103 @@
+{
+    "categories": {
+        "sneakers": "Sneakers",
+        "toys": "Spielzeug & Actionfiguren",
+        "posters": "Plakate",
+        "retroTech": "Retro-Technik",
+        "tradingCards": "Sammelkarten",
+        "comics": "Comics",
+        "watches": "Uhren",
+        "collectorItems": "Sammlerstücke"
+    },
+    "header": {
+        "search": "Nach seltenen Objekten suchen...",
+        "searchMobile": "Seltene Objekte suchen..."
+    },
+    "home": {
+        "exclusiveDrop": "Exklusiver Drop",
+        "viewDropDetails": "Details ansehen",
+        "trendingNow": "Im Trend",
+        "viewAll": "Alle ansehen"
+    },
+    "product": {
+        "back": "Zurück",
+        "buyNow": "Jetzt kaufen (Sichere Zahlung)",
+        "placeBid": "Gebot abgeben",
+        "buyerProtection": "Käuferschutz",
+        "buyerProtectionDesc": "Erhalte den bestellten Artikel oder dein Geld zurück. Wir halten die Mittel bis zur Bestätigung.",
+        "secureTransaction": "Sichere Transaktion über Stripe",
+        "secureTransactionDesc": "Deine Zahlungsinformationen werden verschlüsselt und sicher von Stripe verarbeitet.",
+        "aboutSeller": "Über den Verkäufer",
+        "follow": "Folgen",
+        "reviews": "Bewertungen",
+        "itemDescription": "Artikelbeschreibung & Geschichte"
+    },
+    "favorites": {
+        "title": "Meine Favoriten",
+        "itemsSaved": "Artikel gespeichert",
+        "emptyTitle": "Deine Wunschliste ist leer",
+        "emptyDesc": "Erkunde den Markt und finde seltene Schätze.",
+        "explore": "Marktplatz erkunden"
+    },
+    "profile": {
+        "editProfile": "Profil bearbeiten",
+        "itemsSold": "Verkaufte Artikel",
+        "activeListings": "Aktive Anzeigen",
+        "followers": "Follower",
+        "myListings": "Meine Anzeigen",
+        "reviews": "Bewertungen",
+        "addItem": "Objekt hinzufügen",
+        "active": "Aktiv",
+        "sold": "Verkauft",
+        "views": "Ansichten",
+        "likes": "Likes",
+        "loading": "Profil wird geladen...",
+        "error": "Fehler beim Laden der Profildaten."
+    },
+    "addItem": {
+        "title": "Objekt hinzufügen",
+        "titleField": "Titel",
+        "category": "Kategorie",
+        "condition": "Zustand",
+        "price": "Preis (€)",
+        "description": "Beschreibung",
+        "descPlaceholder": "Beschreibe dein Objekt im Detail...",
+        "imageUrl": "Bild-URL",
+        "cancel": "Abbrechen",
+        "submit": "Zum Katalog hinzufügen",
+        "titleRequired": "Titel ist erforderlich.",
+        "priceRequired": "Preis ist erforderlich.",
+        "priceInvalid": "Preis muss eine gültige Zahl sein.",
+        "pricePositive": "Preis muss größer als 0 sein."
+    },
+    "messages": {
+        "title": "Nachrichten",
+        "searchInbox": "Posteingang durchsuchen...",
+        "all": "Alle",
+        "buying": "Käufe",
+        "selling": "Verkäufe",
+        "online": "Online",
+        "makeOffer": "Angebot machen",
+        "offerReceived": "Angebot erhalten",
+        "accept": "Akzeptieren",
+        "decline": "Ablehnen",
+        "typePlaceholder": "Nachricht schreiben...",
+        "back": "Zurück"
+    },
+    "auth": {
+        "welcome": "Willkommen bei Collector.shop",
+        "loginDesc": "Melde dich an, um auf dein Konto zuzugreifen",
+        "loginButton": "Mit Keycloak anmelden",
+        "noAccount": "Noch kein Konto?",
+        "createAccount": "Konto erstellen",
+        "joinTitle": "Collector.shop beitreten",
+        "joinDesc": "Erstelle dein Konto und beginne zu sammeln",
+        "registerButton": "Konto über Keycloak erstellen",
+        "haveAccount": "Schon ein Konto?",
+        "signIn": "Anmelden"
+    },
+    "common": {
+        "signIn": "Anmelden",
+        "signUp": "Registrieren"
+    }
+}

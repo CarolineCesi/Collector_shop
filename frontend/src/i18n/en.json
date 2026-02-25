@@ -1,0 +1,103 @@
+{
+    "categories": {
+        "sneakers": "Sneakers",
+        "toys": "Toys & Action Figures",
+        "posters": "Posters",
+        "retroTech": "Retro Tech",
+        "tradingCards": "Trading Cards",
+        "comics": "Comics",
+        "watches": "Watches",
+        "collectorItems": "Collector Items"
+    },
+    "header": {
+        "search": "Search for rare items, vintage tech...",
+        "searchMobile": "Search rare items..."
+    },
+    "home": {
+        "exclusiveDrop": "Exclusive Drop",
+        "viewDropDetails": "View Drop Details",
+        "trendingNow": "Trending Now",
+        "viewAll": "View All"
+    },
+    "product": {
+        "back": "Back",
+        "buyNow": "Buy Now (Secure Payment)",
+        "placeBid": "Place Bid",
+        "buyerProtection": "Buyer Protection",
+        "buyerProtectionDesc": "Get the item you ordered or your money back. We hold funds until you confirm receipt.",
+        "secureTransaction": "Secure Transaction via Stripe",
+        "secureTransactionDesc": "Your payment information is encrypted and securely processed by Stripe.",
+        "aboutSeller": "About the Seller",
+        "follow": "Follow",
+        "reviews": "reviews",
+        "itemDescription": "Item Description & History"
+    },
+    "favorites": {
+        "title": "My Favorites",
+        "itemsSaved": "items saved",
+        "emptyTitle": "Your wishlist is empty",
+        "emptyDesc": "Start exploring to find rare treasures.",
+        "explore": "Explore Marketplace"
+    },
+    "profile": {
+        "editProfile": "Edit Profile",
+        "itemsSold": "Items Sold",
+        "activeListings": "Active Listings",
+        "followers": "Followers",
+        "myListings": "My Listings",
+        "reviews": "Reviews",
+        "addItem": "Add an item",
+        "active": "Active",
+        "sold": "Sold",
+        "views": "views",
+        "likes": "likes",
+        "loading": "Loading profile...",
+        "error": "Error loading profile data."
+    },
+    "addItem": {
+        "title": "Add an item",
+        "titleField": "Title",
+        "category": "Category",
+        "condition": "Condition",
+        "price": "Price ($)",
+        "description": "Description",
+        "descPlaceholder": "Describe your item in detail...",
+        "imageUrl": "Image URL",
+        "cancel": "Cancel",
+        "submit": "Add to catalogue",
+        "titleRequired": "Title is required.",
+        "priceRequired": "Price is required.",
+        "priceInvalid": "Price must be a valid number.",
+        "pricePositive": "Price must be greater than 0."
+    },
+    "messages": {
+        "title": "Messages",
+        "searchInbox": "Search inbox...",
+        "all": "All",
+        "buying": "Buying",
+        "selling": "Selling",
+        "online": "Online",
+        "makeOffer": "Make Offer",
+        "offerReceived": "Offer received",
+        "accept": "Accept",
+        "decline": "Decline",
+        "typePlaceholder": "Type a message...",
+        "back": "Back"
+    },
+    "auth": {
+        "welcome": "Welcome to Collector.shop",
+        "loginDesc": "Sign in to access your account",
+        "loginButton": "Sign in with Keycloak",
+        "noAccount": "Don't have an account?",
+        "createAccount": "Create an account",
+        "joinTitle": "Join Collector.shop",
+        "joinDesc": "Create your account and start collecting",
+        "registerButton": "Create an account via Keycloak",
+        "haveAccount": "Already have an account?",
+        "signIn": "Sign in"
+    },
+    "common": {
+        "signIn": "Sign In",
+        "signUp": "Sign Up"
+    }
+}
