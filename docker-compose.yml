@@ -84,46 +84,6 @@ services:
     networks:
       - shop_net
 
-  db-messagerie:
-    image: postgres:15-alpine
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_MESS}
-      POSTGRES_DB: ${POSTGRES_DB_MESS}
-    ports:
-      - "5434:5432"
-    volumes:
-      - db-messagerie-data:/var/lib/postgresql/data
-      - ./service_messagerie/src/init.sql:/docker-entrypoint-initdb.d/init.sql
-    networks:
-      - shop_net
-
-  rabbitmq:
-    image: rabbitmq:3-management
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    networks:
-      - shop_net
-
-  service_messagerie:
-    build:
-      context: ./service_messagerie
-      dockerfile: Dockerfile
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_MESS}
-      POSTGRES_DB: ${POSTGRES_DB_MESS}
-      POSTGRES_HOST: db-messagerie
-      RABBITMQ_URL: amqp://rabbitmq:5672
-    ports:
-      - "3003:3003"
-    depends_on:
-      - db-messagerie
-      - rabbitmq
-    networks:
-      - shop_net
-
   keycloak:
     image: quay.io/keycloak/keycloak:24.0
     command: start-dev --import-realm
