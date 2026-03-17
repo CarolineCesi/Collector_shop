@@ -57,12 +57,13 @@ jobs:
     name: SonarCloud Scan
     needs: security-scan
     runs-on: ubuntu-latest
+    environment: Dev
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: SonarCloud Scan
-        uses: sonarsource/sonarqube-scan-action@v5
+        uses: sonarsource/sonarqube-scan-action@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
