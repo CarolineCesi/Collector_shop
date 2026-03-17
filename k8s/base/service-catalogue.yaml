@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-catalogue
+  labels:
+    app: service-catalogue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-catalogue
+  template:
+    metadata:
+      labels:
+        app: service-catalogue
+    spec:
+      containers:
+      - name: service-catalogue
+        image: service-catalogue:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: POSTGRES_PASSWORD_CATALOGUE
+        - name: POSTGRES_DB
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: POSTGRES_DB_CATALOGUE
+        - name: POSTGRES_HOST
+          value: "db-catalogue"
+        ports:
+        - containerPort: 3001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-catalogue
+spec:
+  selector:
+    app: service-catalogue
+  ports:
+    - protocol: TCP
+      port: 3001
+      targetPort: 3001

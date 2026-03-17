@@ -1,0 +1,108 @@
+name: CI/CD Dev Environment
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      # Build Frontend
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - name: Build and Test Frontend
+        run: |
+          cd frontend
+          npm install
+          npm test --if-present
+
+      # Build Backend Services
+      - name: Build and Test Catalogue
+        run: |
+          cd service_catalogue
+          npm install
+          npm test --if-present
+
+      - name: Build and Test Utilisateur
+        run: |
+          cd service_utilisateur
+          npm install
+          npm test --if-present
+
+      - name: Build and Test Gateway
+        run: |
+          cd api_gateway
+          npm install
+          npm test --if-present
+
+  security-scan:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Trivy vulnerability scanner in repo mode
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          ignore-unfixed: true
+          format: 'table'
+
+  docker-build-push:
+    needs: security-scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Frontend
+        uses: docker/build-push-action@v4
+        with:
+          context: ./frontend
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/collector-frontend:dev
+
+      - name: Build and push Catalogue
+        uses: docker/build-push-action@v4
+        with:
+          context: ./service_catalogue
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/collector-catalogue:dev
+
+      - name: Build and push Utilisateur
+        uses: docker/build-push-action@v4
+        with:
+          context: ./service_utilisateur
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/collector-utilisateur:dev
+          
+      - name: Build and push Gateway
+        uses: docker/build-push-action@v4
+        with:
+          context: ./api_gateway
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/collector-gateway:dev
+
+  deploy-dev:
+    needs: docker-build-push
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install kubectl
+        uses: azure/setup-kubectl@v3
+      # Note: For a real Minikube deployment from GitHub Actions (which runs in cloud),
+      # one would typically use a self-hosted runner on the Minikube machine,
+      # or expose the Minikube API server securely. We simulate the deployment step here.
+      - name: Deploy to Minikube Dev Namespace
+        run: |
+          echo "Simulating deployment to Minikube dev namespace..."
+          # kubectl apply -k k8s/overlays/dev

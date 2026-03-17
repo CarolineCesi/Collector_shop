@@ -1,0 +1,40 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base
+
+namespace: production
+
+commonLabels:
+  env: prod
+
+images:
+  - name: frontend
+    newName: collector-frontend
+    newTag: latest
+  - name: service-catalogue
+    newName: collector-catalogue
+    newTag: latest
+  - name: service-utilisateur
+    newName: collector-utilisateur
+    newTag: latest
+  - name: api-gateway
+    newName: collector-gateway
+    newTag: latest
+
+patchesStrategicMerge:
+  - |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: service-catalogue
+    spec:
+      replicas: 3
+  - |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: service-utilisateur
+    spec:
+      replicas: 2

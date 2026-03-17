@@ -13,7 +13,7 @@ yarn-error.log*
 # Fichiers OS
 .DS_Store
 Thumbs.db
-Notes.txt
+sources/
 
 # Build output
 dist/
