@@ -110,11 +110,11 @@ app.post('/products', async (req, res) => {
         // Détection de fraude sur les prix (Exigence Direction)
         // Simulation: Si le prix est > 10000 ou < 1, on considère cela comme potentiellement frauduleux
         if (numericPrice > 10000) {
-             console.warn(`Alerte Fraude: Prix trop élevé (${numericPrice}) pour l'article ${title}`);
-             // En situation réelle, on pourrait marquer l'article comme "en attente de modération"
+            console.warn(`Alerte Fraude: Prix trop élevé (${numericPrice}) pour l'article ${title}`);
+            // En situation réelle, on pourrait marquer l'article comme "en attente de modération"
         }
         if (numericPrice < 1) {
-             return res.status(400).json({ error: 'Le prix est trop bas (fraude suspectée)' });
+            return res.status(400).json({ error: 'Le prix est trop bas (fraude suspectée)' });
         }
 
         const id = 'item_' + Date.now();

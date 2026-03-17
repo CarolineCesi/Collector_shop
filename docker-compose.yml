@@ -36,7 +36,7 @@ services:
     environment:
       CATALOGUE_URL: http://service_catalogue:3001
     ports:
-      - "8080:8080"
+      - "8088:8080"
     depends_on:
       - service_catalogue
     networks:
