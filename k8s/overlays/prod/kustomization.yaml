@@ -11,16 +11,16 @@ commonLabels:
 
 images:
   - name: frontend
-    newName: YOUR_DOCKERHUB_USERNAME/collector-frontend
+    newName: ghcr.io/carolinecesi/collector-frontend
     newTag: prod
   - name: service-catalogue
-    newName: YOUR_DOCKERHUB_USERNAME/collector-catalogue
+    newName: ghcr.io/carolinecesi/collector-catalogue
     newTag: prod
   - name: service-utilisateur
-    newName: YOUR_DOCKERHUB_USERNAME/collector-utilisateur
+    newName: ghcr.io/carolinecesi/collector-utilisateur
     newTag: prod
   - name: api-gateway
-    newName: YOUR_DOCKERHUB_USERNAME/collector-gateway
+    newName: ghcr.io/carolinecesi/collector-gateway
     newTag: prod
 
 patchesStrategicMerge:

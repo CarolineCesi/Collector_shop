@@ -52,6 +52,13 @@ jobs:
           npm install
           npm run test:unit --if-present
 
+      # Initialize Databases
+      - name: Initialize Databases
+        run: |
+          sudo apt-get update && sudo apt-get install -y postgresql-client
+          PGPASSWORD=password psql -h localhost -U postgres -d catalogue_db -f service_catalogue/src/init.sql
+          PGPASSWORD=password psql -h localhost -p 5433 -U postgres -d utilisateur_db -f service_utilisateur/src/init.sql
+
       # Build & Test Catalogue Path
       - name: Build and Test Catalogue
         env:
@@ -118,39 +125,40 @@ jobs:
     environment: Prod
     steps:
       - uses: actions/checkout@v4
-      - name: Login to Docker Hub
+      - name: Login to GHCR
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push Frontend
         uses: docker/build-push-action@v4
         with:
           context: ./frontend
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/collector-frontend:prod
+          tags: ghcr.io/${{ github.repository_owner }}/collector-frontend:prod
 
       - name: Build and push Catalogue
         uses: docker/build-push-action@v4
         with:
           context: ./service_catalogue
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/collector-catalogue:prod
+          tags: ghcr.io/${{ github.repository_owner }}/collector-catalogue:prod
 
       - name: Build and push Utilisateur
         uses: docker/build-push-action@v4
         with:
           context: ./service_utilisateur
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/collector-utilisateur:prod
+          tags: ghcr.io/${{ github.repository_owner }}/collector-utilisateur:prod
           
       - name: Build and push Gateway
         uses: docker/build-push-action@v4
         with:
           context: ./api_gateway
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/collector-gateway:prod
+          tags: ghcr.io/${{ github.repository_owner }}/collector-gateway:prod
 
   deploy-prod:
     needs: docker-build-push
