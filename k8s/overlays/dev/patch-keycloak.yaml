@@ -12,3 +12,5 @@ spec:
               value: "collector-shop-dev"
             - name: KC_PROXY
               value: "edge"
+            - name: KC_HTTP_RELATIVE_PATH
+              value: "/auth"
