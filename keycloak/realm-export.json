@@ -32,12 +32,16 @@
       "redirectUris": [
         "http://localhost:5173/*",
         "http://localhost:5174/*",
-        "http://localhost:3000/*"
+        "http://localhost:3000/*",
+        "http://collector-shop.local/*",
+        "https://collector-shop-dev/*"
       ],
       "webOrigins": [
         "http://localhost:5173",
         "http://localhost:5174",
-        "http://localhost:3000"
+        "http://localhost:3000",
+        "http://collector-shop.local",
+        "https://collector-shop-dev"
       ],
       "standardFlowEnabled": true,
       "implicitFlowEnabled": false,
