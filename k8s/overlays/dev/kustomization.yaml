@@ -5,6 +5,9 @@ resources:
   - ../../base
   - ingress-dev.yaml
 
+patches:
+  - path: patch-keycloak.yaml
+
 namespace: dev
 
 labels:
