@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: api-gateway
-        image: "ghcr.io/carolinecesi/collector-gateway:prod"
+        image: "collector-gateway"
         imagePullPolicy: IfNotPresent
         env:
         - name: CATALOGUE_URL

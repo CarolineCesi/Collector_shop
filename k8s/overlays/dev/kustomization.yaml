@@ -10,15 +10,15 @@ commonLabels:
   env: dev
 
 images:
-  - name: frontend
+  - name: collector-frontend
     newName: ghcr.io/carolinecesi/collector-frontend
     newTag: dev
-  - name: service-catalogue
+  - name: collector-catalogue
     newName: ghcr.io/carolinecesi/collector-catalogue
     newTag: dev
-  - name: service-utilisateur
+  - name: collector-utilisateur
     newName: ghcr.io/carolinecesi/collector-utilisateur
     newTag: dev
-  - name: api-gateway
+  - name: collector-gateway
     newName: ghcr.io/carolinecesi/collector-gateway
     newTag: dev

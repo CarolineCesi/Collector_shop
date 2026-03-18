@@ -9,7 +9,20 @@ namespace: production
 commonLabels:
   env: prod
 
-# Le déploiement utilise désormais les images directes du base pour éviter les erreurs de formatage Kustomize
+images:
+  - name: collector-frontend
+    newName: ghcr.io/carolinecesi/collector-frontend
+    newTag: prod
+  - name: collector-catalogue
+    newName: ghcr.io/carolinecesi/collector-catalogue
+    newTag: prod
+  - name: collector-utilisateur
+    newName: ghcr.io/carolinecesi/collector-utilisateur
+    newTag: prod
+  - name: collector-gateway
+    newName: ghcr.io/carolinecesi/collector-gateway
+    newTag: prod
+
 patches:
   - target:
       kind: Deployment

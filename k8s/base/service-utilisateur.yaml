@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: service-utilisateur
-        image: "ghcr.io/carolinecesi/collector-utilisateur:prod"
+        image: "collector-utilisateur"
         imagePullPolicy: IfNotPresent
         env:
         - name: POSTGRES_USER
