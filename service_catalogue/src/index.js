@@ -32,7 +32,11 @@ app.get('/products', async (req, res) => {
         res.json(formatted);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ 
+            error: 'Internal Server Error', 
+            message: err.message,
+            stack: err.stack
+        });
     }
 });
 
@@ -46,7 +50,11 @@ app.get('/products/exclusive', async (req, res) => {
         res.json(item);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ 
+            error: 'Internal Server Error', 
+            message: err.message,
+            stack: err.stack
+        });
     }
 });
 
@@ -69,7 +77,11 @@ app.get('/products/user/:userId', async (req, res) => {
         res.json(formatted);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ 
+            error: 'Internal Server Error', 
+            message: err.message,
+            stack: err.stack
+        });
     }
 });
 
@@ -84,7 +96,11 @@ app.get('/products/:id', async (req, res) => {
         res.json(item);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ 
+            error: 'Internal Server Error', 
+            message: err.message,
+            stack: err.stack
+        });
     }
 });
 
@@ -128,7 +144,11 @@ app.post('/products', async (req, res) => {
         res.status(201).json(item);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ 
+            error: 'Internal Server Error', 
+            message: err.message,
+            stack: err.stack
+        });
     }
 });
 
