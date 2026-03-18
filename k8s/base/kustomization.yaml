@@ -14,10 +14,10 @@ resources:
 configMapGenerator:
   - name: catalogue-db-init
     files:
-      - ../../service_catalogue/src/init.sql
+      - catalogue-init.sql
   - name: user-db-init
     files:
-      - ../../service_utilisateur/src/init.sql
+      - user-init.sql
 
 generatorOptions:
   disableNameSuffixHash: true
