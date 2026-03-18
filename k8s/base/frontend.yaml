@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: frontend
+        image: "ghcr.io/carolinecesi/collector-frontend:prod"
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80

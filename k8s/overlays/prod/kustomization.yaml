@@ -9,32 +9,25 @@ namespace: production
 commonLabels:
   env: prod
 
-images:
-  - name: frontend
-    newName: ghcr.io/carolinecesi/collector-frontend
-    newTag: prod
-  - name: service-catalogue
-    newName: ghcr.io/carolinecesi/collector-catalogue
-    newTag: prod
-  - name: service-utilisateur
-    newName: ghcr.io/carolinecesi/collector-utilisateur
-    newTag: prod
-  - name: api-gateway
-    newName: ghcr.io/carolinecesi/collector-gateway
-    newTag: prod
-
-patchesStrategicMerge:
-  - |-
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
+# Le déploiement utilise désormais les images directes du base pour éviter les erreurs de formatage Kustomize
+patches:
+  - target:
+      kind: Deployment
       name: service-catalogue
-    spec:
-      replicas: 3
-  - |-
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
+    patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: service-catalogue
+      spec:
+        replicas: 3
+  - target:
+      kind: Deployment
       name: service-utilisateur
-    spec:
-      replicas: 2
+    patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: service-utilisateur
+      spec:
+        replicas: 2
