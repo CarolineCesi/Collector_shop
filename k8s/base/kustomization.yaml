@@ -6,7 +6,6 @@ resources:
   - db-catalogue.yaml
   - db-utilisateur.yaml
   - frontend.yaml
-  - ingress.yaml
   - keycloak.yaml
   - secrets.yaml
   - service-catalogue.yaml
