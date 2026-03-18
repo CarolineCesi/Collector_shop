@@ -52,6 +52,13 @@ jobs:
           npm install
           npm run test:unit --if-present
 
+      # Initialize Databases
+      - name: Initialize Databases
+        run: |
+          sudo apt-get update && sudo apt-get install -y postgresql-client
+          PGPASSWORD=password psql -h localhost -U postgres -d catalogue_db -f service_catalogue/src/init.sql
+          PGPASSWORD=password psql -h localhost -p 5433 -U postgres -d utilisateur_db -f service_utilisateur/src/init.sql
+
       # Build & Test Catalogue Path
       - name: Build and Test Catalogue
         env:
