@@ -5,23 +5,21 @@ metadata:
   namespace: dev
   annotations:
     kubernetes.io/ingress.class: nginx
-    # Capture tout ce qui est après le slash et le réinjecte dans /$2
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   rules:
   - host: collector-shop-dev
     http:
       paths:
-      - path: /api(/|$)(.*) # Capture le groupe 2 : (.*)
-        pathType: ImplementationSpecific
+      - path: /api
+        pathType: Prefix
         backend:
           service:
             name: api-gateway
             port:
               number: 8080
-      - path: /auth(/|$)(.*) # Capture pour Keycloak
-        pathType: ImplementationSpecific
+      - path: /auth
+        pathType: Prefix
         backend:
           service:
             name: keycloak
