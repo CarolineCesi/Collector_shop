@@ -10,9 +10,10 @@ const pool = new Pool({
     host: process.env.POSTGRES_HOST,
     database: process.env.POSTGRES_DB,
     password: process.env.POSTGRES_PASSWORD,
-    port: 5432,
+    port: process.env.POSTGRES_PORT || 5432,
 });
 
 module.exports = {
     query: (text, params) => pool.query(text, params),
+    pool: pool
 };

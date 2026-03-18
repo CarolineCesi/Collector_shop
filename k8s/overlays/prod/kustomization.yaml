@@ -11,17 +11,17 @@ commonLabels:
 
 images:
   - name: frontend
-    newName: collector-frontend
-    newTag: latest
+    newName: YOUR_DOCKERHUB_USERNAME/collector-frontend
+    newTag: prod
   - name: service-catalogue
-    newName: collector-catalogue
-    newTag: latest
+    newName: YOUR_DOCKERHUB_USERNAME/collector-catalogue
+    newTag: prod
   - name: service-utilisateur
-    newName: collector-utilisateur
-    newTag: latest
+    newName: YOUR_DOCKERHUB_USERNAME/collector-utilisateur
+    newTag: prod
   - name: api-gateway
-    newName: collector-gateway
-    newTag: latest
+    newName: YOUR_DOCKERHUB_USERNAME/collector-gateway
+    newTag: prod
 
 patchesStrategicMerge:
   - |-
