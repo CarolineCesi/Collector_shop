@@ -89,10 +89,7 @@ app.post('/login', async (req, res) => {
         res.status(201).json(rows[0]);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ 
-            error: 'Internal Server Error', 
-            message: err.message
-        });
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
@@ -125,10 +122,7 @@ app.post('/register', async (req, res) => {
         res.status(201).json(rows[0]);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ 
-            error: 'Internal Server Error', 
-            message: err.message
-        });
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
@@ -148,10 +142,7 @@ app.get('/:id', async (req, res) => {
         });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ 
-            error: 'Internal Server Error', 
-            message: err.message
-        });
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
@@ -164,10 +155,7 @@ app.get('/:id/favorites', async (req, res) => {
         res.json(favorites);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ 
-            error: 'Internal Server Error', 
-            message: err.message
-        });
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
@@ -179,10 +167,7 @@ app.get('/:id/favorites/:itemId', async (req, res) => {
         res.json({ isFavorite: rows.length > 0 });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ 
-            error: 'Internal Server Error', 
-            message: err.message
-        });
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
@@ -208,10 +193,7 @@ app.post('/:id/favorites', async (req, res) => {
         res.status(201).json({ success: true });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ 
-            error: 'Internal Server Error', 
-            message: err.message
-        });
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
@@ -223,10 +205,7 @@ app.delete('/:id/favorites/:itemId', async (req, res) => {
         res.json({ success: true });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ 
-            error: 'Internal Server Error', 
-            message: err.message
-        });
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
@@ -239,10 +218,7 @@ app.get('/:id/listings', async (req, res) => {
         res.json(listings);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ 
-            error: 'Internal Server Error', 
-            message: err.message
-        });
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 

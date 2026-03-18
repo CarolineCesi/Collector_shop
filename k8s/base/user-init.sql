@@ -1,3 +1,8 @@
+CREATE DATABASE user_db;
+CREATE DATABASE keycloak_db;
+
+\c user_db 
+
 CREATE TABLE IF NOT EXISTS users (
     id VARCHAR(50) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,

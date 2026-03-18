@@ -50,6 +50,12 @@ spec:
               key: KEYCLOAK_ADMIN_PASSWORD
         ports:
         - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /auth/health/ready
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
         volumeMounts:
         - name: realm-import
           mountPath: /opt/keycloak/data/import/realm-export.json
