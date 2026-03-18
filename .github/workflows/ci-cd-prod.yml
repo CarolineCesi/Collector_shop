@@ -20,7 +20,7 @@ jobs:
         run: |
           cd frontend
           npm install
-          npm test --if-present
+          npm run test:unit --if-present
 
       # Build Backend Services
       - name: Build and Test Catalogue

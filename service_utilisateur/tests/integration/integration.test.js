@@ -1,10 +1,10 @@
 const request = require('supertest');
-const { app } = require('./index');
-const db = require('./db');
+const { app } = require('../../src/index');
+const db = require('../../src/db');
 
 // Ces tests attendent que Docker soit lancé
 describe('Utilisateur Service - Integration Tests (Concrete)', () => {
-    
+
     afterAll(async () => {
         await db.pool.end();
     });
@@ -49,7 +49,7 @@ describe('Utilisateur Service - Integration Tests (Concrete)', () => {
                     item_id: itemId,
                     item_data: { title: 'Integration Test Favorite' }
                 });
-            
+
             expect(response.status).toBe(201);
 
             // Vérifier en base

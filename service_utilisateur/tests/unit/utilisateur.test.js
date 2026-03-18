@@ -1,10 +1,10 @@
 const request = require('supertest');
-const { app, verifyToken, getKey } = require('./index');
-const db = require('./db');
+const { app, verifyToken, getKey } = require('../../src/index');
+const db = require('../../src/db');
 const jwt = require('jsonwebtoken');
 
 // Mock DB
-jest.mock('./db', () => ({
+jest.mock('../../src/db', () => ({
     query: jest.fn()
 }));
 
@@ -32,19 +32,19 @@ describe('Utilisateur Service Unit Tests', () => {
             const response = await request(app)
                 .post('/login')
                 .send({ keycloak_id: 'user123', email: 'test@example.com', name: 'Test User' });
-            
+
             expect(response.status).toBe(200);
             expect(response.body.id).toBe('user123');
         });
 
         it('should create new user if not exists', async () => {
             db.query.mockResolvedValueOnce({ rows: [] })
-                    .mockResolvedValueOnce({ rows: [{ id: 'user123', email: 'test@example.com', handle: '@testuser' }] });
-            
+                .mockResolvedValueOnce({ rows: [{ id: 'user123', email: 'test@example.com', handle: '@testuser' }] });
+
             const response = await request(app)
                 .post('/login')
                 .send({ keycloak_id: 'user123', email: 'test@example.com', name: 'Test User' });
-            
+
             expect(response.status).toBe(201);
             expect(response.body.handle).toBe('@testuser');
         });
@@ -65,7 +65,7 @@ describe('Utilisateur Service Unit Tests', () => {
         const newUser = { keycloak_id: 'u2', name: 'New User', email: 'u2@ex.com' };
         it('should register a new user', async () => {
             db.query.mockResolvedValueOnce({ rows: [] })
-                    .mockResolvedValueOnce({ rows: [{ id: 'u2', email: 'u2@ex.com' }] });
+                .mockResolvedValueOnce({ rows: [{ id: 'u2', email: 'u2@ex.com' }] });
             const response = await request(app).post('/register').send(newUser);
             expect(response.status).toBe(201);
         });
@@ -103,9 +103,9 @@ describe('Utilisateur Service Unit Tests', () => {
         });
 
         it('should handle internal errors', async () => {
-          db.query.mockRejectedValue(new Error('DB error'));
-          const response = await request(app).get('/u1');
-          expect(response.status).toBe(500);
+            db.query.mockRejectedValue(new Error('DB error'));
+            const response = await request(app).get('/u1');
+            expect(response.status).toBe(500);
         });
     });
 
@@ -126,18 +126,18 @@ describe('Utilisateur Service Unit Tests', () => {
 
         it('should add item to favorites', async () => {
             db.query.mockResolvedValueOnce({ rows: [] })
-                    .mockResolvedValueOnce({ rows: [] });
-            
+                .mockResolvedValueOnce({ rows: [] });
+
             const response = await request(app)
                 .post('/user123/favorites')
                 .send({ item_id: 'item1', item_data: { title: 'Test Item' } });
-            
+
             expect(response.status).toBe(201);
         });
 
         it('should reject if missing item_id for favorite', async () => {
-          const response = await request(app).post('/user123/favorites').send({ item_data: {} });
-          expect(response.status).toBe(400);
+            const response = await request(app).post('/user123/favorites').send({ item_data: {} });
+            expect(response.status).toBe(400);
         });
 
         it('should reject if already in favorites', async () => {
@@ -155,9 +155,9 @@ describe('Utilisateur Service Unit Tests', () => {
         });
 
         it('should handle errors', async () => {
-          db.query.mockRejectedValue(new Error('DB error'));
-          const response = await request(app).get('/u1/favorites');
-          expect(response.status).toBe(500);
+            db.query.mockRejectedValue(new Error('DB error'));
+            const response = await request(app).get('/u1/favorites');
+            expect(response.status).toBe(500);
         });
     });
 
@@ -169,9 +169,9 @@ describe('Utilisateur Service Unit Tests', () => {
         });
 
         it('should handle errors', async () => {
-          db.query.mockRejectedValue(new Error('DB error'));
-          const response = await request(app).get('/user123/listings');
-          expect(response.status).toBe(500);
+            db.query.mockRejectedValue(new Error('DB error'));
+            const response = await request(app).get('/user123/listings');
+            expect(response.status).toBe(500);
         });
     });
 

@@ -1,10 +1,10 @@
 const request = require('supertest');
-const app = require('./index');
-const db = require('./db');
+const app = require('../../src/index');
+const db = require('../../src/db');
 
 // Ces tests attendent que Docker soit lancé
 describe('Catalogue Service - Integration Tests (Concrete)', () => {
-    
+
     afterAll(async () => {
         await db.pool.end();
     });

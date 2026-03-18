@@ -1,9 +1,9 @@
 const request = require('supertest');
-const app = require('./index');
-const db = require('./db');
+const app = require('../../src/index');
+const db = require('../../src/db');
 
 // Mock DB
-jest.mock('./db', () => ({
+jest.mock('../../src/db', () => ({
     query: jest.fn()
 }));
 
@@ -113,7 +113,7 @@ describe('Catalogue Service Unit Tests', () => {
             const response = await request(app)
                 .post('/products')
                 .send({ ...newItem, price: 20000 });
-            
+
             expect(response.status).toBe(201);
             expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('Alerte Fraude: Prix trop élevé'));
             consoleSpy.mockRestore();

@@ -1,6 +1,6 @@
 const { Pool } = require('pg');
 
-if (!process.env.POSTGRES_PASSWORD) {
+if (!process.env.POSTGRES_PASSWORD && process.env.NODE_ENV !== 'test') {
     console.error('CRITICAL: POSTGRES_PASSWORD environment variable is missing.');
     process.exit(1);
 }
