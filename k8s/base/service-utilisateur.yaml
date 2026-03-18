@@ -13,9 +13,9 @@ spec:
     metadata:
       labels:
         app: service-utilisateur
-    imagePullSecrets:
-      - name: ghcr-auth
     spec:
+      imagePullSecrets:
+        - name: ghcr-auth 
       containers:
       - name: service-utilisateur
         image: collector-utilisateur

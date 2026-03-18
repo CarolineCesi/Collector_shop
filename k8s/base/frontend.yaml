@@ -13,9 +13,9 @@ spec:
     metadata:
       labels:
         app: frontend
-    imagePullSecrets:
-      - name: ghcr-auth
     spec:
+      imagePullSecrets:
+        - name: ghcr-auth
       containers:
       - name: frontend
         image: collector-frontend

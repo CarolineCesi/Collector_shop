@@ -13,9 +13,9 @@ spec:
     metadata:
       labels:
         app: service-catalogue
-    imagePullSecrets:
-      - name: ghcr-auth
     spec:
+      imagePullSecrets:
+        - name: ghcr-auth
       containers:
       - name: service-catalogue
         image: collector-catalogue

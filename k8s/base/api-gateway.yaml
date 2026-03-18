@@ -13,9 +13,9 @@ spec:
     metadata:
       labels:
         app: api-gateway
-    imagePullSecrets:
-      - name: ghcr-auth
     spec:
+      imagePullSecrets:
+        - name: ghcr-auth
       containers:
       - name: api-gateway
         image: collector-gateway
