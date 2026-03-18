@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: collector-shop.dev
+  - host: collector-shop-dev
     http:
       paths:
       - path: /api
