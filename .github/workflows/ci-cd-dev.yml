@@ -97,7 +97,7 @@ jobs:
       - name: Build and push Utilisateur
         uses: docker/build-push-action@v4
         with:
-          context: ./collector-utilisateur
+          context: ./service_utilisateur
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/collector-utilisateur:dev
           
