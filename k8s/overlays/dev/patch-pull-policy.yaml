@@ -1,0 +1,44 @@
+# Patch to ensure new images are ALWAYS pulled in dev
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  template:
+    spec:
+      containers:
+        - name: frontend
+          imagePullPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+spec:
+  template:
+    spec:
+      containers:
+        - name: api-gateway
+          imagePullPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-catalogue
+spec:
+  template:
+    spec:
+      containers:
+        - name: service-catalogue
+          imagePullPolicy: Always
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-utilisateur
+spec:
+  template:
+    spec:
+      containers:
+        - name: service-utilisateur
+          imagePullPolicy: Always

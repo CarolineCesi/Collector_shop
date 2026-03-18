@@ -7,6 +7,7 @@ resources:
 
 patches:
   - path: patch-keycloak.yaml
+  - path: patch-pull-policy.yaml
 
 namespace: dev
 
