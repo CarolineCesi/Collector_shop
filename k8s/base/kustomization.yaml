@@ -3,10 +3,9 @@ kind: Kustomization
 
 resources:
   - api-gateway.yaml
-  - db-catalogue.yaml
-  - db-utilisateur.yaml
   - frontend.yaml
-  - keycloak.yaml
-  - secrets.yaml
   - service-catalogue.yaml
   - service-utilisateur.yaml
+  - keycloak.yaml
+  - postgres-catalogue.yaml
+  - postgres-utilisateur.yaml
