@@ -7,8 +7,10 @@ resources:
 
 namespace: dev
 
-commonLabels:
-  env: dev
+labels:
+  - pairs:
+      env: dev
+    includeSelectors: true
 
 images:
   - name: collector-frontend
