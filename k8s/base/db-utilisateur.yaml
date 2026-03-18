@@ -38,10 +38,15 @@ spec:
         volumeMounts:
         - name: postgres-utilisateur-storage
           mountPath: /var/lib/postgresql/data
+        - name: db-init
+          mountPath: /docker-entrypoint-initdb.d
       volumes:
       - name: postgres-utilisateur-storage
         persistentVolumeClaim:
           claimName: postgres-utilisateur-pvc
+      - name: db-init
+        configMap:
+          name: user-db-init
 ---
 apiVersion: v1
 kind: Service

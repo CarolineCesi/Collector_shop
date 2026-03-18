@@ -19,6 +19,8 @@ spec:
         image: quay.io/keycloak/keycloak:24.0
         args: ["start-dev", "--import-realm"]
         env:
+        - name: KC_HTTP_RELATIVE_PATH
+          value: "/auth"
         - name: KC_DB
           value: "postgres"
         - name: KC_DB_URL

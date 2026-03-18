@@ -10,3 +10,14 @@ resources:
   - secrets.yaml
   - service-catalogue.yaml
   - service-utilisateur.yaml
+
+configMapGenerator:
+  - name: catalogue-db-init
+    files:
+      - ../../service_catalogue/src/init.sql
+  - name: user-db-init
+    files:
+      - ../../service_utilisateur/src/init.sql
+
+generatorOptions:
+  disableNameSuffixHash: true
