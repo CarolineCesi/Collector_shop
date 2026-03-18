@@ -3,11 +3,11 @@ kind: Kustomization
 
 resources:
   - ../../base
-  - ingress.yaml
+  - ../../base/ingress.yaml
 
 namespace: production
 
-labels:
+commonLabels:
   env: prod
 
 images:

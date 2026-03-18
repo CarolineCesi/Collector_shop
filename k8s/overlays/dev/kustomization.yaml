@@ -3,11 +3,11 @@ kind: Kustomization
 
 resources:
   - ../../base
-  - ingress-dev.yaml
+  - ../../base/ingress-dev.yaml
 
 namespace: dev
 
-labels:
+commonLabels:
   env: dev
 
 images:
