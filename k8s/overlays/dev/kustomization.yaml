@@ -11,14 +11,14 @@ commonLabels:
 
 images:
   - name: frontend
-    newName: collector-frontend
+    newName: ghcr.io/carolinecesi/collector-frontend
     newTag: dev
   - name: service-catalogue
-    newName: collector-catalogue
+    newName: ghcr.io/carolinecesi/collector-catalogue
     newTag: dev
   - name: service-utilisateur
-    newName: collector-utilisateur
+    newName: ghcr.io/carolinecesi/collector-utilisateur
     newTag: dev
   - name: api-gateway
-    newName: collector-gateway
+    newName: ghcr.io/carolinecesi/collector-gateway
     newTag: dev

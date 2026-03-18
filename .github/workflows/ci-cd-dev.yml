@@ -86,28 +86,28 @@ jobs:
         with:
           context: ./frontend
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/collector-frontend:dev
+          tags: ghcr.io/carolinecesi/collector-frontend:dev
 
       - name: Build and push Catalogue
         uses: docker/build-push-action@v4
         with:
           context: ./service_catalogue
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/collector-catalogue:dev
+          tags: ghcr.io/carolinecesi/collector-catalogue:dev
 
       - name: Build and push Utilisateur
         uses: docker/build-push-action@v4
         with:
           context: ./service_utilisateur
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/collector-utilisateur:dev
+          tags: ghcr.io/carolinecesi/collector-utilisateur:dev
           
       - name: Build and push Gateway
         uses: docker/build-push-action@v4
         with:
           context: ./api_gateway
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/collector-gateway:dev
+          tags: ghcr.io/carolinecesi/collector-gateway:dev
 
   deploy-dev:
     needs: docker-build-push
