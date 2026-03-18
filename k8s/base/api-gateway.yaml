@@ -13,10 +13,12 @@ spec:
     metadata:
       labels:
         app: api-gateway
+    imagePullSecrets:
+      - name: ghcr-auth
     spec:
       containers:
       - name: api-gateway
-        image: "collector-gateway"
+        image: collector-gateway
         imagePullPolicy: IfNotPresent
         env:
         - name: CATALOGUE_URL

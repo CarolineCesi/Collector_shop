@@ -13,10 +13,12 @@ spec:
     metadata:
       labels:
         app: service-utilisateur
+    imagePullSecrets:
+      - name: ghcr-auth
     spec:
       containers:
       - name: service-utilisateur
-        image: "collector-utilisateur"
+        image: collector-utilisateur
         imagePullPolicy: IfNotPresent
         env:
         - name: POSTGRES_USER
