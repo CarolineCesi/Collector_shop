@@ -18,6 +18,9 @@ configMapGenerator:
   - name: user-db-init
     files:
       - user-init.sql
+  - name: keycloak-realm
+    files:
+      - ../../keycloak/realm-export.json
 
 generatorOptions:
   disableNameSuffixHash: true
