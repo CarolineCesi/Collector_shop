@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: service-utilisateur
-        image: service-utilisateur:latest
+        image: service-utilisateur
         imagePullPolicy: IfNotPresent
         env:
         - name: POSTGRES_USER

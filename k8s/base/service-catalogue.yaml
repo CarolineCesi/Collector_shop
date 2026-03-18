@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: service-catalogue
-        image: service-catalogue:latest
+        image: service-catalogue
         imagePullPolicy: IfNotPresent
         env:
         - name: POSTGRES_USER
