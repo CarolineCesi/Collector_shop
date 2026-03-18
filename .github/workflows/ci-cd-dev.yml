@@ -20,26 +20,26 @@ jobs:
         run: |
           cd frontend
           npm install
-          npm run test:unit --if-present
+          npm test --if-present
 
       # Build Backend Services
       - name: Build and Test Catalogue
         run: |
           cd service_catalogue
           npm install
-          npm run test:unit --if-present
+          npm test --if-present
 
       - name: Build and Test Utilisateur
         run: |
           cd service_utilisateur
           npm install
-          npm run test:unit --if-present
+          npm test --if-present
 
       - name: Build and Test Gateway
         run: |
           cd api_gateway
           npm install
-          npm run test:unit --if-present
+          npm test --if-present
 
   security-scan:
     needs: build-and-test
@@ -115,6 +115,9 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install kubectl
         uses: azure/setup-kubectl@v3
+      # Note: For a real Minikube deployment from GitHub Actions (which runs in cloud),
+      # one would typically use a self-hosted runner on the Minikube machine,
+      # or expose the Minikube API server securely. We simulate the deployment step here.
       - name: Deploy to Minikube Dev Namespace
         run: |
           echo "Simulating deployment to Minikube dev namespace..."
