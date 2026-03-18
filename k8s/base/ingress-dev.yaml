@@ -2,12 +2,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: shop-ingress
-  namespace: main
+  namespace: dev
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  - host: collector-shop
+  - host: collector-shop.dev
     http:
       paths:
       - path: /api
