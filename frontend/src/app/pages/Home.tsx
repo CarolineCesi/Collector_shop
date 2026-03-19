@@ -55,7 +55,7 @@ export function Home() {
           <div className="inline-flex items-center gap-2 bg-amber-400/90 text-cyan-950 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg shadow-amber-400/20 border border-amber-200/30 backdrop-blur">
             DEV
             <span className="opacity-80 font-semibold normal-case tracking-normal">
-              Environnement de développement
+              Environnement de développement Collector.shop - DEV
             </span>
           </div>
         </div>
