@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 
 const app = express();
+app.set('trust proxy', 1);
 const PORT = process.env.PORT || 8080;
 
 // Middleware de sécurité
@@ -32,7 +33,7 @@ app.get('/', (req, res) => {
 // Proxy vers service_catalogue
 // Le service catalogue sera accessible sur le port interne 3001 dans docker
 app.use('/api/catalogue', createProxyMiddleware({
-    target: process.env.CATALOGUE_URL || 'http://service_catalogue:3001',
+    target: process.env.CATALOGUE_URL || 'http://service-catalogue:3001',
     changeOrigin: true,
     pathRewrite: {
         '^/api/catalogue': '', // Réécrit /api/catalogue/products en /products par exemple
@@ -41,7 +42,7 @@ app.use('/api/catalogue', createProxyMiddleware({
 
 // Proxy vers service_utilisateur
 app.use('/api/users', createProxyMiddleware({
-    target: process.env.UTILISATEUR_URL || 'http://service_utilisateur:3002',
+    target: process.env.UTILISATEUR_URL || 'http://service-utilisateur:3002',
     changeOrigin: true,
     pathRewrite: {
         '^/api/users': '',

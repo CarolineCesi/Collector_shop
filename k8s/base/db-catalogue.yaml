@@ -38,10 +38,15 @@ spec:
         volumeMounts:
         - name: postgres-catalogue-storage
           mountPath: /var/lib/postgresql/data
+        - name: db-init
+          mountPath: /docker-entrypoint-initdb.d
       volumes:
       - name: postgres-catalogue-storage
         persistentVolumeClaim:
           claimName: postgres-catalogue-pvc
+      - name: db-init
+        configMap:
+          name: catalogue-db-init
 ---
 apiVersion: v1
 kind: Service

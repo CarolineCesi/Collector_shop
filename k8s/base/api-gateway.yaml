@@ -14,13 +14,17 @@ spec:
       labels:
         app: api-gateway
     spec:
+      imagePullSecrets:
+        - name: ghcr-auth
       containers:
       - name: api-gateway
-        image: api-gateway:latest
+        image: collector-gateway
         imagePullPolicy: IfNotPresent
         env:
         - name: CATALOGUE_URL
           value: "http://service-catalogue:3001"
+        - name: UTILISATEUR_URL
+          value: "http://service-utilisateur:3002"
         ports:
         - containerPort: 8080
 ---

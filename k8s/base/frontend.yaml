@@ -14,9 +14,11 @@ spec:
       labels:
         app: frontend
     spec:
+      imagePullSecrets:
+        - name: ghcr-auth
       containers:
       - name: frontend
-        image: frontend:latest
+        image: collector-frontend
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80

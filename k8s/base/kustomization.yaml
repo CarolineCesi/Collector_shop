@@ -6,8 +6,21 @@ resources:
   - db-catalogue.yaml
   - db-utilisateur.yaml
   - frontend.yaml
-  - ingress.yaml
   - keycloak.yaml
   - secrets.yaml
   - service-catalogue.yaml
   - service-utilisateur.yaml
+
+configMapGenerator:
+  - name: catalogue-db-init
+    files:
+      - catalogue-init.sql
+  - name: user-db-init
+    files:
+      - user-init.sql
+  - name: keycloak-realm
+    files:
+      - realm-export.json
+
+generatorOptions:
+  disableNameSuffixHash: true

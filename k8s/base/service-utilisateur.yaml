@@ -14,9 +14,11 @@ spec:
       labels:
         app: service-utilisateur
     spec:
+      imagePullSecrets:
+        - name: ghcr-auth 
       containers:
       - name: service-utilisateur
-        image: service-utilisateur:latest
+        image: collector-utilisateur
         imagePullPolicy: IfNotPresent
         env:
         - name: POSTGRES_USER

@@ -71,41 +71,45 @@ jobs:
     needs: sonarcloud
     runs-on: ubuntu-latest
     environment: Dev
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v4
-      - name: Login to Docker Hub
+      - name: Login to GHCR
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push Frontend
         uses: docker/build-push-action@v4
         with:
           context: ./frontend
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/collector-frontend:dev
+          tags: ghcr.io/carolinecesi/collector-frontend:dev
 
       - name: Build and push Catalogue
         uses: docker/build-push-action@v4
         with:
           context: ./service_catalogue
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/collector-catalogue:dev
+          tags: ghcr.io/carolinecesi/collector-catalogue:dev
 
       - name: Build and push Utilisateur
         uses: docker/build-push-action@v4
         with:
           context: ./service_utilisateur
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/collector-utilisateur:dev
+          tags: ghcr.io/carolinecesi/collector-utilisateur:dev
           
       - name: Build and push Gateway
         uses: docker/build-push-action@v4
         with:
           context: ./api_gateway
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/collector-gateway:dev
+          tags: ghcr.io/carolinecesi/collector-gateway:dev
 
   deploy-dev:
     needs: docker-build-push

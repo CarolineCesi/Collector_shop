@@ -26,13 +26,17 @@ app.get('/products', async (req, res) => {
             category: r.category,
             price: formatPrice(r.price),
             priceRaw: parseFloat(r.price),
-            image: r.images[0] || '',
+            image: (r.images && r.images[0]) || '',
             user_id: r.user_id || null
         }));
         res.json(formatted);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ 
+            error: 'Internal Server Error', 
+            message: err.message,
+            stack: err.stack
+        });
     }
 });
 
@@ -46,7 +50,11 @@ app.get('/products/exclusive', async (req, res) => {
         res.json(item);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ 
+            error: 'Internal Server Error', 
+            message: err.message,
+            stack: err.stack
+        });
     }
 });
 
@@ -61,7 +69,7 @@ app.get('/products/user/:userId', async (req, res) => {
             category: r.category,
             price: formatPrice(r.price),
             priceRaw: parseFloat(r.price),
-            image: r.images[0] || '',
+            image: (r.images && r.images[0]) || '',
             status: 'Active',
             views: Math.floor(Math.random() * 500),
             likes: Math.floor(Math.random() * 50)
@@ -69,7 +77,11 @@ app.get('/products/user/:userId', async (req, res) => {
         res.json(formatted);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ 
+            error: 'Internal Server Error', 
+            message: err.message,
+            stack: err.stack
+        });
     }
 });
 
@@ -84,7 +96,11 @@ app.get('/products/:id', async (req, res) => {
         res.json(item);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ 
+            error: 'Internal Server Error', 
+            message: err.message,
+            stack: err.stack
+        });
     }
 });
 
