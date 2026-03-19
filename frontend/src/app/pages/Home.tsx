@@ -15,7 +15,6 @@ export function Home() {
   const { userId, user } = useUser();
   const { t, formatPrice } = useI18n();
   const navigate = useNavigate();
-  const isDev = import.meta.env.DEV;
 
   useEffect(() => {
     fetchTrendingProducts().then(setProducts).catch(console.error);
@@ -50,16 +49,6 @@ export function Home() {
 
   return (
     <div className="pb-24 bg-cyan-950 min-h-screen">
-      {isDev && (
-        <div className="fixed top-4 right-4 z-50">
-          <div className="inline-flex items-center gap-2 bg-amber-400/90 text-cyan-950 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg shadow-amber-400/20 border border-amber-200/30 backdrop-blur">
-            DEV
-            <span className="opacity-80 font-semibold normal-case tracking-normal">
-              Environnement de développement Collector.shop - DEV
-            </span>
-          </div>
-        </div>
-      )}
       {/* Hero Section */}
       <section className="relative w-full overflow-hidden bg-cyan-950">
         <div className="absolute inset-0 z-0">
